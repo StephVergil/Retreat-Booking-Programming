@@ -58,9 +58,3 @@ The Retreat Booking Program streamlines the process of booking retreats, offerin
    - Covers ticket selection, add-ons, cost calculations, and invoicing.
 
 ---
-
-## **Usage**
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/StephVergil/Retreat-Booking-Programming.git
