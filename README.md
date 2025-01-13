@@ -1,61 +1,101 @@
-# **Adventure Retreat Booking System**
+# Advanced Zeek Scripting for Network Traffic Analysis
 
-The Adventure Retreat Booking System simplifies the process of selecting and customizing retreats, offering dynamic cost calculations and email invoicing.
-
----
-
-## **Features**
-
-- **Retreat Options**:
-  - **Ron Burgundy**: $350/person, Leadership Instruction: $100/person, Equipment: $40/person.
-  - **Michael Scott**: $1000/person, Leadership Instruction: $100/person.
-  - **Dr. Cox**: $400/person, Lodging: $65/day, Luxury Lodging: $120/day.
-  - **Tony Johnson**: $700/person, Equipment Rental: $40/day.
-
-- **Customization**:
-  - Add leadership instruction, lodging, luxury lodging, or equipment rentals.
-
-- **Dynamic Cost Calculation**:
-  - Calculates total cost based on user inputs.
-
-- **Email Invoicing**:
-  - Prompts for the customer’s email and simulates sending an invoice.
+This project delves into the advanced functionalities of Zeek scripting to process and analyze network traffic with precision. Through hands-on exercises, this lab demonstrates how to utilize Zeek scripts for monitoring UDP and TCP traffic, customizing log streams, and organizing logs for specific protocols or events, enabling efficient and detailed network traffic analysis.
 
 ---
 
-## **System Flow**
-
-1. **Start**: Display retreat options in a menu.
-2. **Selection**: Choose a retreat and specify tickets and add-ons.
-3. **Cost Calculation**: Add base prices and selected options to the total.
-4. **Repeat or Finalize**: Option to book additional retreats or finalize bookings.
-5. **Invoicing**: Collect the customer’s email and send an invoice.
+## Objectives
+- Master the use of Zeek scripting for targeted traffic monitoring and analysis.
+- Execute and customize Zeek scripts for protocol-specific traffic handling.
+- Develop and refine log streams to isolate critical network events.
+- Organize and manage logs to streamline network analysis workflows.
 
 ---
 
-## **Technical Details**
-
-- **Global Constants**:
-  - Prices for retreats and add-ons are defined for easy updates.
-- **Modular Functions**:
-  - Each retreat has a dedicated function for customization and cost calculations.
-- **Invoice Function**:
-  - Simulates sending an email invoice with the total cost.
+## Tools Used
+- **Zeek**: For real-time traffic monitoring, analysis, and detailed log generation.
+- **Sample PCAP Files**: High-quality test data to simulate network scenarios.
+- **Linux Shell Scripts**: Automation tools for cleanup and script optimization.
 
 ---
 
-## **Supporting Documents**
+## Key Steps
 
-1. [**Flow Chart**](https://github.com/StephVergil/Retreat-Booking-Programming/blob/main/S_Vergil-Module15-Flow_Chart.pdf):
-   - A visual guide showing the program’s logic, from menu display to invoicing.
+### **1. Starting Zeek for Analysis**
+- Initialize Zeek to begin traffic analysis:
+  ```bash
+  cd $ZEEK_INSTALL/bin && sudo ./zeekctl start
+  ```
 
-2. [**Module Summary**](https://github.com/StephVergil/Retreat-Booking-Programming/blob/main/S_Vergil-Module15-Summary.docx):
-   - Explains the program’s purpose, structure, and features.
+### **2. Executing Zeek Scripts**
+- **UDP Traffic Analysis**:
+  - Navigate to the **Lab-Scripts** directory: `cd ~/Zeek-Labs/Lab-Scripts/`
+  - Process a packet capture file with a UDP-focused Zeek script:
+    ```bash
+    zeek –C –r ../Sample-PCAP/smallFlows.pcap ../Lab-Scripts/lab6_sec2-2.zeek
+    ```
+- **TCP Traffic Analysis**:
+  - Inspect the TCP Zeek script content:
+    ```bash
+    nl ../Lab-Scripts/lab6_sec2-3.zeek
+    ```
+  - Execute the script to analyze TCP traffic:
+    ```bash
+    zeek –C -r ../Sample-PCAP/smallFlows.pcap ../Lab-Scripts/lab6_sec2-3.zeek
+    ```
 
-3. [**Pseudocode Document**](https://github.com/StephVergil/Retreat-Booking-Programming/blob/main/S_Vergil-Module15.docx):
-   - Details the pseudocode and logic for retreat selection, customization, and invoicing.
+### **3. Modifying Zeek Log Streams**
+- **Renaming Logs**:
+  - Review the script for log renaming:
+    ```bash
+    nl ../Lab-Scripts/lab6_sec3-1.zeek
+    ```
+  - Execute the script to generate updated log files:
+    ```bash
+    zeek –C -r ../Sample-PCAP/smallFlows.pcap ../Lab-Scripts/lab6_sec3-1.zeek
+    ```
+- **Creating Protocol-Specific Logs**:
+  - Examine the script for protocol-specific log generation:
+    ```bash
+    nl ../Lab-Scripts/lab6_sec3-2.zeek
+    ```
+  - Generate logs focusing on HTTP traffic:
+    ```bash
+    zeek –C -r ../Sample-PCAP/smallFlows.pcap ../Lab-Scripts/lab6_sec3-2.zeek
+    ```
 
-4. [**C++ Source Code**](https://github.com/StephVergil/Retreat-Booking-Programming/blob/main/main.cpp):
-   - Implements the booking system using modular functions.
+### **4. Cleanup and Shutdown**
+- Use a cleanup script to remove temporary files and logs:
+  ```bash
+  ./../Lab-Scripts/lab_clean.sh
+  ```
+- Stop Zeek after completing the lab:
+  ```bash
+  cd $ZEEK_INSTALL/bin && sudo ./zeekctl stop
+  ```
 
 ---
+
+## Results
+The lab demonstrated Zeek’s advanced capabilities in capturing and organizing network traffic logs. Key outcomes included:
+- Identification of distinct UDP and TCP traffic patterns through tailored scripts.
+- Generation of organized and protocol-specific logs, such as HTTP traffic logs, for focused analysis.
+- Utilization of Zeek scripting to streamline log management and enhance analytical clarity.
+
+---
+
+## Project Resources
+- **Project Link**: [Introduction to Zeek Scripting](https://github.com/StephVergil/Introduction-to-Zeek-Scripting/blob/main/VNetLab3%20Lab06.docx.pdf)
+- [Zeek Documentation](https://docs.zeek.org/)
+- [PCAP Samples](https://wiki.wireshark.org/SampleCaptures)
+- [Zeek Scripting Reference Guide](https://docs.zeek.org/en/current/scripting/index.html)
+
+---
+
+## Conclusion
+This lab underscores the power of Zeek scripting in customizing and enhancing network traffic analysis workflows. By utilizing custom scripts, analysts can isolate, segment, and organize network logs for specific protocols or events, improving clarity and efficiency. This ability is essential for real-time network monitoring and forensic investigations.
+
+---
+
+## Disclaimer
+This project was conducted in a controlled environment for educational purposes. Unauthorized use of these tools or techniques outside such environments may violate ethical guidelines and legal regulations.
